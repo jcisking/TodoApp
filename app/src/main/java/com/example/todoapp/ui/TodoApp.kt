@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,7 +19,9 @@ import com.example.todoapp.R
 @Composable
 fun TodoApp() {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
     ) {
         Image(
             modifier = Modifier.fillMaxWidth().height(200.dp),
@@ -29,7 +32,7 @@ fun TodoApp() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp),
+                .padding(start = 20.dp, end = 20.dp, top = 40.dp),
 //            horizontalAlignment = Alignment.CenterHorizontally
         ) {
            TodoTopBar()

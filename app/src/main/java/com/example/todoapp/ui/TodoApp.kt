@@ -17,7 +17,9 @@ import com.example.todoapp.R
 
 @Composable
 fun TodoApp() {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Image(
             modifier = Modifier.fillMaxWidth().height(200.dp),
             contentScale = ContentScale.Crop,

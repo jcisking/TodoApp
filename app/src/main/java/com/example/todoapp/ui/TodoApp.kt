@@ -45,11 +45,21 @@ fun TodoApp() {
 fun TodoTopBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .background(Color.Blue)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = stringResource(id = R.string.top_bar_text) )
-        Icon(painter = painterResource(id = R.drawable.sun) , contentDescription = null)
+        Text(
+            text = stringResource(id = R.string.top_bar_text),
+            style = MaterialTheme.typography.h1
+        )
+        Icon(
+            painter = painterResource(id = R.drawable.sun),
+            contentDescription = null
+        )
     }
+}
+
+@Composable
+fun TodoListItem() {
+
 }

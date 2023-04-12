@@ -1,12 +1,13 @@
 package com.example.todoapp.ui
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -36,7 +37,9 @@ fun TodoApp() {
 //            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TodoTopBar()
-            TodoListItem(modifier = Modifier.padding(top = 30.dp))
+            TextField(value = "", onValueChange = {})
+
+
 
 
         }
@@ -63,20 +66,18 @@ fun TodoTopBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun TodoListItem(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isSelected: Boolean
 ) {
     Row(
         modifier = modifier.fillMaxWidth()
     ) {
-        IconButton(onClick = { /*TODO*/ }, modifier = Modifier) {
-            Icon(painter = painterResource(id = R.drawable.icon_cross), contentDescription = null)
-            Icon(
-                modifier = Modifier.background(Color.Blue),
-                painter = painterResource(id = R.drawable.radio_button_unchecked_fill0_wght400_grad0_opsz48),
-                tint = Color.Green,
-                contentDescription = null
-            )
-        }
+
+        Icon(
+            painter = painterResource(id = R.drawable.unfilled_radio_button),
+            contentDescription = null
+        )
+
         Text(text = "adklsdf")
 
         Icon(

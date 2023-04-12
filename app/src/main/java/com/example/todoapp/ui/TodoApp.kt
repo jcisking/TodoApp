@@ -37,13 +37,29 @@ fun TodoApp() {
 //            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TodoTopBar()
-            TextField(value = "", onValueChange = {})
+            TodoInput(
+                value = "",
+                onValueChange = {}
+            )
 
 
 
 
         }
     }
+}
+
+@Composable
+fun TodoInput(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    TextField(
+        modifier = modifier,
+        value = value,
+        onValueChange = onValueChange
+    )
 }
 
 @Composable

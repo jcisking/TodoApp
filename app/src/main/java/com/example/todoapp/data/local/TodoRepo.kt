@@ -10,5 +10,8 @@ object TodoRepo {
     fun getTodoList(): List<Todo> {
         return todoList.toList()
     }
+    fun toggleIsCompleted(index: Int) {
+        !todoList[index].isCompleted
+    }
 }
 

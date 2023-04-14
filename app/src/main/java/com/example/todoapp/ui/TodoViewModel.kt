@@ -23,4 +23,14 @@ class TodoViewModel: ViewModel() {
             )
         }
     }
+
+    fun toggleIsCompleted(index: Int) {
+        TodoRepo.toggleIsCompleted(index)
+        val updatedTodoList = TodoRepo.getTodoList()
+        _uiState.update {
+            it.copy(
+                listOfTodos = updatedTodoList
+            )
+        }
+    }
 }

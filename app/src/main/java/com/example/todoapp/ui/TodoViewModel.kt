@@ -5,6 +5,7 @@ import com.example.todoapp.data.Todo
 import com.example.todoapp.data.local.TodoRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.isActive
 import kotlinx.coroutines.flow.update
 
 class TodoViewModel: ViewModel() {
@@ -30,6 +31,24 @@ class TodoViewModel: ViewModel() {
         _uiState.update {
             it.copy(
                 listOfTodos = updatedTodoList
+            )
+        }
+    }
+
+    fun onActiveClicked() {
+        val isActiveSelected = _uiState.value.isActiveSelected
+        _uiState.update {
+            it.copy(
+                isActiveSelected = !isActiveSelected
+            )
+        }
+    }
+
+    fun onCompletedClicked() {
+        val isCompletedSelected = _uiState.value.isCompletedSelected
+        _uiState.update {
+            it.copy(
+                isCompletedSelected = isCompletedSelected
             )
         }
     }

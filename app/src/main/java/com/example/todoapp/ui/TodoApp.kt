@@ -10,7 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+//import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -20,8 +20,8 @@ import com.example.todoapp.data.Todo
 
 @Composable
 fun TodoApp() {
-    val viewModel: TodoViewModel = viewModel()
-    val todoUiState = viewModel.uiState.collectAsState().value
+//    val viewModel: TodoViewModel = viewModel()
+//    val todoUiState = viewModel.uiState.collectAsState().value
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -43,19 +43,19 @@ fun TodoApp() {
         ) {
             TodoTopBar()
 
-            TodoInput(
-                value = todoUiState.todoInputValue,
-                onValueChange = {viewModel.updateTodoInputValue(it)}
-            )
+//            TodoInput(
+//                value = todoUiState.todoInputValue,
+//                onValueChange = {viewModel.updateTodoInputValue(it)}
+//            )
 
-            LazyColumn() {
-                items(todoUiState.listOfTodos) { todo ->
-                    TodoListItem(
-                        isCompleted = todo.isCompleted ,
-                        todo = todo
-                    )
-                }
-            }
+//            LazyColumn() {
+//                items(todoUiState.listOfTodos) { todo ->
+//                    TodoListItem(
+//                        isCompleted = todo.isCompleted ,
+//                        todo = todo
+//                    )
+//                }
+//            }
         }
     }
 }

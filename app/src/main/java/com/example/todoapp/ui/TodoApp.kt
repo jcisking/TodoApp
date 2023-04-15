@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -21,6 +22,7 @@ import com.example.todoapp.R
 @Composable
 fun TodoApp() {
     val viewModel: TodoViewModel = viewModel()
+    val todoUiState = viewModel.uiState.collectAsState().value
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -50,10 +52,6 @@ fun TodoApp() {
                     TodoListItem(isSelected = )
                 }
             }
-
-
-
-
         }
     }
 }

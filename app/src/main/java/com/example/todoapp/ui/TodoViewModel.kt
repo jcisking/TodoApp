@@ -14,7 +14,6 @@ class TodoViewModel: ViewModel() {
 
 
 
-
     fun addNewTodo(newTodoItem: Todo) {
         TodoRepo.addNewTodo(newTodoItem)
         val updatedTodoList = TodoRepo.getTodoList()
@@ -49,6 +48,15 @@ class TodoViewModel: ViewModel() {
         _uiState.update {
             it.copy(
                 isCompletedSelected = isCompletedSelected
+            )
+        }
+    }
+
+    fun onAllSelected() {
+        _uiState.update {
+            it.copy(
+                isCompletedSelected = false,
+                isActiveSelected = false
             )
         }
     }

@@ -53,7 +53,7 @@ fun TodoApp() {
             LazyColumn() {
                 items(todoUiState.listOfTodos) { todo ->
                     TodoListItem(
-                        isSelected = ,
+                        isCompleted = todo.isCompleted ,
                         todo = todo
                     )
                 }
@@ -97,7 +97,7 @@ fun TodoTopBar(modifier: Modifier = Modifier) {
 fun TodoListItem(
     todo: Todo,
     modifier: Modifier = Modifier,
-    isSelected: Boolean
+    isCompleted: Boolean
 ) {
     Row(
         modifier = modifier.fillMaxWidth()

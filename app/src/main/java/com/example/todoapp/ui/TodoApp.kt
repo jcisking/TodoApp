@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.todoapp.R
+import com.example.todoapp.data.Todo
 
 @Composable
 fun TodoApp() {
@@ -43,13 +44,18 @@ fun TodoApp() {
 //            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TodoTopBar()
+
             TodoInput(
-                value = "",
-                onValueChange = {}
+                value = todoUiState.todoInputValue,
+                onValueChange = {viewModel.updateTodoInputValue(it)}
             )
+
             LazyColumn() {
-                items() {
-                    TodoListItem(isSelected = )
+                items(todoUiState.listOfTodos) { todo ->
+                    TodoListItem(
+                        isSelected = ,
+                        todo = todo
+                    )
                 }
             }
         }
@@ -89,6 +95,7 @@ fun TodoTopBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun TodoListItem(
+    todo: Todo,
     modifier: Modifier = Modifier,
     isSelected: Boolean
 ) {
@@ -101,7 +108,7 @@ fun TodoListItem(
             contentDescription = null
         )
 
-        Text(text = "adklsdf")
+        Text(text = todo.todoText)
 
         Icon(
             painter = painterResource(id = R.drawable.icon_cross),

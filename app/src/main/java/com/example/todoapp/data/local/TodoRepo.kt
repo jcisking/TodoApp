@@ -5,7 +5,7 @@ import com.example.todoapp.data.Todo
 object TodoRepo {
     private val todoList: MutableList<Todo> = mutableListOf()
     fun addNewTodo(item: Todo) {
-        todoList.add(item)
+        todoList.add(index = 0, element = item)
     }
     fun getTodoList(): List<Todo> {
         return todoList.toList()

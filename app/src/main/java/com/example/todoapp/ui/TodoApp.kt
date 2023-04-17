@@ -56,6 +56,10 @@ fun TodoApp() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
+                    onDone = {
+                        viewModel.addNewTodo(Todo(todoText = todoUiState.todoInputValue))
+                        viewModel.updateTodoInputValue("")
+                    }
 
                 ),
                 onValueChange = {viewModel.updateTodoInputValue(it)}

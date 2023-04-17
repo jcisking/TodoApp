@@ -1,11 +1,14 @@
 package com.example.todoapp.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,6 +17,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.todoapp.R
 import com.example.todoapp.data.Todo
@@ -45,6 +50,14 @@ fun TodoApp() {
 
             TodoInput(
                 value = todoUiState.todoInputValue,
+                label = R.string.enter_new_todo,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+
+                ),
                 onValueChange = {viewModel.updateTodoInputValue(it)}
             )
 
@@ -63,11 +76,17 @@ fun TodoApp() {
 @Composable
 fun TodoInput(
     value: String,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions,
+    @StringRes label: Int,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     TextField(
         modifier = modifier,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        label = {Text(stringResource(id = label))},
         value = value,
         onValueChange = onValueChange
     )

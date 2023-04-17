@@ -1,5 +1,6 @@
 package com.example.todoapp.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -15,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -27,6 +29,8 @@ import com.example.todoapp.data.Todo
 fun TodoApp() {
     val viewModel: TodoViewModel = viewModel()
     val todoUiState = viewModel.uiState.collectAsState().value
+    val focusManager = LocalFocusManager.current
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -57,8 +61,13 @@ fun TodoApp() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        viewModel.addNewTodo(Todo(todoText = todoUiState.todoInputValue))
-                        viewModel.updateTodoInputValue("")
+                        if (todoUiState.todoInputValue == "" ) {
+                            focusManager.clearFocus()
+                        }
+                        else {
+                            viewModel.addNewTodo(Todo(todoText = todoUiState.todoInputValue))
+                            viewModel.updateTodoInputValue("")
+                        }
                     }
 
                 ),

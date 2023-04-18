@@ -5,9 +5,11 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -80,22 +82,33 @@ fun TodoApp() {
                 onValueChange = {viewModel.updateTodoInputValue(it)}
             )
 
-            LazyColumn(
-                modifier = Modifier
-                    .height(300.dp)
-                    .background(Color.Green)
-            ) {
-                items(todoUiState.listOfTodos) { todo ->
-                    TodoListItem(
-                        isCompleted = todo.isCompleted ,
-                        todo = todo
-                    )
-                }
-            }
+            TodoLazyList(
+                todoUiState = todoUiState,
+                onTodoClicked = {viewModel.toggleIsCompleted(index = it)}
+            )
             RemainingTodosAndClearButtonRow(uiState = todoUiState)
             TodoBottomAppBar()
 
 
+        }
+    }
+}
+
+@Composable
+private fun TodoLazyList(
+    todoUiState: TodoUiState,
+    onTodoClicked: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier
+            .height(300.dp)
+    ) {
+        itemsIndexed(todoUiState.listOfTodos) { index, todo ->
+            TodoListItem(
+                todo = todo,
+                onTodoClicked = {onTodoClicked(index)},
+            )
         }
     }
 }
@@ -146,18 +159,26 @@ fun TodoTopBar(modifier: Modifier = Modifier) {
 @Composable
 fun TodoListItem(
     todo: Todo,
+    onTodoClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    isCompleted: Boolean
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable  {onTodoClicked} ,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
 
         Icon(
             modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.unfilled_radio_button),
+            painter =
+            if (todo.isCompleted) {
+                painterResource(id = R.drawable.filled_radio_button)
+            }
+            else {
+                painterResource(id = R.drawable.unfilled_radio_button)
+                 },
             contentDescription = null
         )
 

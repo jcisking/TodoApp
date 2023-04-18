@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.layout.ContentScale
@@ -82,6 +83,9 @@ fun TodoApp() {
                     )
                 }
             }
+            RemainingTodosAndClearButtonRow(uiState = todoUiState)
+
+
         }
     }
 }
@@ -145,6 +149,30 @@ fun TodoListItem(
             contentDescription = null
         )
 
+        
+    }
+
+}
+
+
+@Composable
+fun RemainingTodosAndClearButtonRow(
+    uiState: TodoUiState,
+    modifier: Modifier = Modifier
+) {
+
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        val sizeOfTodoList = uiState.listOfTodos.size.toString()
+        Text(text = stringResource(
+            id = R.string.todos_remaining,
+            formatArgs = arrayOf(sizeOfTodoList)
+            )
+        )
+        Text(text = stringResource(id = R.string.clear_completed))
         
     }
 

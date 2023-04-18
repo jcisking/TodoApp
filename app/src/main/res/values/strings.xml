@@ -2,4 +2,6 @@
     <string name="app_name" >Todo App</string>
     <string name="top_bar_text" >TODO</string>
     <string name="enter_new_todo" >Enter New Todo</string>
+    <string name="clear_completed" >Clear Completed</string>
+    <string name="todos_remaining" >%s items left</string>
 </resources>

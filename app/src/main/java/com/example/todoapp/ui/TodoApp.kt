@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
@@ -25,6 +26,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.todoapp.R
 import com.example.todoapp.data.Todo
+import com.example.todoapp.ui.theme.DarkGrayishBlue
+import com.example.todoapp.ui.theme.VeryDarkBlue
+import com.example.todoapp.ui.theme.VeryDarkDesaturatedBlue
+import com.example.todoapp.ui.theme.VeryDarkGrayishBlueDark1
 
 @Composable
 fun TodoApp() {
@@ -100,9 +105,14 @@ fun TodoInput(
     modifier: Modifier = Modifier
 ) {
     TextField(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 30.dp),
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = VeryDarkDesaturatedBlue
+        ),
         label = {Text(stringResource(id = label))},
         value = value,
         onValueChange = onValueChange
@@ -113,7 +123,8 @@ fun TodoInput(
 fun TodoTopBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(bottom = 40.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
@@ -134,20 +145,31 @@ fun TodoListItem(
     isCompleted: Boolean
 ) {
     Row(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
 
         Icon(
+            modifier = Modifier.size(25.dp),
             painter = painterResource(id = R.drawable.unfilled_radio_button),
             contentDescription = null
         )
 
-        Text(text = todo.todoText)
-
-        Icon(
-            painter = painterResource(id = R.drawable.icon_cross),
-            contentDescription = null
+        Text(
+            modifier = modifier.weight(1f),
+            text = todo.todoText
         )
+
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.size(15.dp),
+                painter = painterResource(id = R.drawable.icon_cross),
+                contentDescription = null
+            )
+        }
+
+
 
         
     }

@@ -4,4 +4,7 @@
     <string name="enter_new_todo" >Enter New Todo</string>
     <string name="clear_completed" >Clear Completed</string>
     <string name="todos_remaining" >%s items left</string>
+    <string name="bottom_app_bar_all" >All</string>
+    <string name="bottom_app_bar_active" >Active</string>
+    <string name="bottom_app_bar_completed" >Completed</string>
 </resources>

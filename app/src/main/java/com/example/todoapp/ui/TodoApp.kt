@@ -80,7 +80,11 @@ fun TodoApp() {
                 onValueChange = {viewModel.updateTodoInputValue(it)}
             )
 
-            LazyColumn() {
+            LazyColumn(
+                modifier = Modifier
+                    .height(300.dp)
+                    .background(Color.Green)
+            ) {
                 items(todoUiState.listOfTodos) { todo ->
                     TodoListItem(
                         isCompleted = todo.isCompleted ,
@@ -89,6 +93,7 @@ fun TodoApp() {
                 }
             }
             RemainingTodosAndClearButtonRow(uiState = todoUiState)
+            TodoBottomAppBar()
 
 
         }
@@ -107,7 +112,7 @@ fun TodoInput(
     TextField(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 30.dp),
+            .padding(bottom = 20.dp),
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         colors = TextFieldDefaults.textFieldColors(
@@ -124,7 +129,7 @@ fun TodoTopBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 40.dp),
+            .padding(bottom = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
@@ -182,9 +187,10 @@ fun RemainingTodosAndClearButtonRow(
     uiState: TodoUiState,
     modifier: Modifier = Modifier
 ) {
-
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -198,4 +204,22 @@ fun RemainingTodosAndClearButtonRow(
         
     }
 
+}
+
+@Composable
+fun TodoBottomAppBar(
+    modifier: Modifier = Modifier 
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp)
+    ) {
+        Text(text = stringResource(id = R.string.bottom_app_bar_all))
+        
+        Text(text = stringResource(id = R.string.bottom_app_bar_active) )
+        
+        Text(text = stringResource(id = R.string.bottom_app_bar_completed))
+        
+    }
 }

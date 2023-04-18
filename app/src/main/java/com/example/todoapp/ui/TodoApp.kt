@@ -100,14 +100,16 @@ private fun TodoLazyList(
     onTodoClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val listOfTodos = todoUiState.listOfTodos
     LazyColumn(
         modifier = modifier
             .height(300.dp)
     ) {
-        itemsIndexed(todoUiState.listOfTodos) { index, todo ->
+        itemsIndexed(listOfTodos) { index, todo ->
             TodoListItem(
                 todo = todo,
                 onTodoClicked = {onTodoClicked(index)},
+                index = index
             )
         }
     }
@@ -159,13 +161,14 @@ fun TodoTopBar(modifier: Modifier = Modifier) {
 @Composable
 fun TodoListItem(
     todo: Todo,
+    index: Int,
     onTodoClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable  {onTodoClicked} ,
+            .clickable  {onTodoClicked(index)} ,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

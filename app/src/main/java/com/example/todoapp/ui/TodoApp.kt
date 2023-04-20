@@ -15,6 +15,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -100,12 +104,11 @@ private fun TodoLazyList(
     onTodoClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val listOfTodos = todoUiState.listOfTodos
     LazyColumn(
         modifier = modifier
             .height(300.dp)
     ) {
-        itemsIndexed(listOfTodos) { index, todo ->
+        itemsIndexed(todoUiState.listOfTodos) { index, todo ->
             TodoListItem(
                 todo = todo,
                 onTodoClicked = {onTodoClicked(index)},
@@ -168,7 +171,7 @@ fun TodoListItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable  {onTodoClicked(index)} ,
+            .clickable { onTodoClicked(index) } ,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
